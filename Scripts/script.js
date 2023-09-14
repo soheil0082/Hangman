@@ -5,14 +5,14 @@ const apiLink = "https://www.wordgamedb.com/api/v1/words/";
 
 mainPanel.addEventListener("click", mainBtnHandler);
 modePanel.addEventListener("click", modeBtnHandler);
-//gamePanel.addEventListener("click", gameBtnHandler);
+gamePanel.addEventListener("click", gameBtnHandler);
 
 function mainBtnHandler(event) {
   let text = event.target.innerText;
 
   if (text == "Play!") {
     mainPanel.style.display = "none";
-    gamePanel.style.display = "grid";
+    newGame();
   } else if (text == "Choose Category") {
     mainPanel.style.display = "none";
     modePanel.style.display = "grid";
@@ -27,7 +27,7 @@ function modeBtnHandler(event) {
 }
 
 function newGame(Category) {
-  if (Category != "all") {
+  if (Category != "all" && Category != null) {
     fetch(apiLink + "?category=" + Category)
       .then((Response) => Response.text())
       .then((words) => {
@@ -38,14 +38,13 @@ function newGame(Category) {
     fetch(apiLink + "random")
       .then((Response) => Response.text())
       .then((word) => {
-        let myWord = JSON.parse(word);
-        updateGameUI(myWord);
+        updateGameUI(JSON.parse(word));
       });
   }
 }
 
 function updateGameUI(word) {
-  console.log(word);
+  localStorage.setItem("currentWord", word.word);
   gamePanel.querySelector("h2").innerText = word.category;
   gamePanel.querySelector("p").innerText = "Hint : " + word.hint;
   gamePanel.querySelector("img").src = "Img/0.png";
@@ -55,5 +54,34 @@ function updateGameUI(word) {
     gamePanel.querySelector("h3").innerText += "_";
   }
 
+  localStorage.setItem("currentGuess", gamePanel.querySelector("h3").innerText);
+
   gamePanel.style.display = "grid";
 }
+
+function gameBtnHandler(event) {
+  let character = event.target.innerText.toLowerCase();
+  let word = localStorage.getItem("currentWord");
+  let guess = localStorage.getItem("currentGuess");
+
+  gamePanel.querySelector("h3").innerText = "";
+  for (let i = 0; i < word.length; i++) {
+    if (word.charAt(i) == character) {
+      guess = guess.replaceAt(i, character);
+    }
+  }
+  gamePanel.querySelector("h3").innerText = guess;
+  localStorage.setItem("currentGuess", guess);
+
+  if (localStorage.getItem("currentWord") == guess) {
+    console.log("You Won");
+  }
+}
+
+String.prototype.replaceAt = function (index, replacement) {
+  return (
+    this.substring(0, index) +
+    replacement +
+    this.substring(index + replacement.length)
+  );
+};
