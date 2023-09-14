@@ -25,15 +25,24 @@ body {
 }
 
 .menu {
-  display: grid;
+  /*grid*/
+  display: none;
   justify-content: center;
   height: 100%;
   align-content: center;
-  gap: 1rem;
+  gap: 2rem;
+}
+
+.modeMenu {
+  display: grid;
+  align-content: center;
+  height: 100%;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
 .btn {
-  padding: 8px 14px;
+  padding: 10px 20px;
   box-shadow: 2px 2px 0 0 white, 4px 4px 0 0 #0f172a;
   border: 2px solid #0f172a;
   border-radius: 10px;
@@ -46,4 +55,8 @@ body {
   transform: translate(-2px, -2px);
   border: 2px solid #f2be22;
   color: #f2be22;
+}
+
+.wide {
+  grid-column: span 2 / auto;
 }
