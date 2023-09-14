@@ -22,9 +22,8 @@ function mainBtnHandler(event) {
 function modeBtnHandler(event) {
   let text = event.target.innerText.toLowerCase();
 
-  newGame(text);
   modePanel.style.display = "none";
-  gamePanel.style.display = "grid";
+  newGame(text);
 }
 
 function newGame(Category) {
@@ -45,4 +44,16 @@ function newGame(Category) {
   }
 }
 
-function updateGameUI(word) {}
+function updateGameUI(word) {
+  console.log(word);
+  gamePanel.querySelector("h2").innerText = word.category;
+  gamePanel.querySelector("p").innerText = "Hint : " + word.hint;
+  gamePanel.querySelector("img").src = "Img/0.png";
+
+  gamePanel.querySelector("h3").innerText = "";
+  for (let i = 0; i < word.numLetters; i++) {
+    gamePanel.querySelector("h3").innerText += "_";
+  }
+
+  gamePanel.style.display = "grid";
+}
