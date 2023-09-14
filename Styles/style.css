@@ -26,7 +26,7 @@ body {
 
 .menu {
   /*grid*/
-  display: none;
+  display: grid;
   justify-content: center;
   height: 100%;
   align-content: center;
@@ -43,7 +43,8 @@ body {
 }
 
 .game {
-  display: grid;
+  /*grid*/
+  display: none;
   grid-template-columns: 1fr;
   text-align: center;
   gap: 1rem;
