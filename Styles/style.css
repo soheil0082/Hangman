@@ -20,13 +20,13 @@ body {
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0 20px 40px rgba(111, 85, 0, 0.25);
-  height: 90vh;
+  height: fit-content;
   max-height: 900px;
 }
 
 .menu {
   /*grid*/
-  display: grid;
+  display: none;
   justify-content: center;
   height: 100%;
   align-content: center;
@@ -48,6 +48,15 @@ body {
   grid-template-columns: 1fr;
   text-align: center;
   gap: 1rem;
+}
+
+.end {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
 }
 
 .keypad {
@@ -100,6 +109,11 @@ body {
   transform: unset;
 }
 
+.gif {
+  width: 500px;
+  border-radius: 10px;
+}
+
 @keyframes shake {
   0% {
     transform: translateX(0);
@@ -140,6 +154,10 @@ img {
 
   .container {
     padding: 10px;
+  }
+
+  .gif {
+    width: 300px;
   }
 }
 
