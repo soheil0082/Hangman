@@ -20,13 +20,14 @@ body {
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0 20px 40px rgba(111, 85, 0, 0.25);
-  height: fit-content;
+  /*fit-content*/
+  height: 90vh;
   max-height: 900px;
 }
 
 .menu {
   /*grid*/
-  display: none;
+  display: grid;
   justify-content: center;
   height: 100%;
   align-content: center;
@@ -51,7 +52,8 @@ body {
 }
 
 .end {
-  display: grid;
+  /*grid*/
+  display: none;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
