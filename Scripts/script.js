@@ -15,6 +15,7 @@ modePanel.addEventListener("click", modeBtnHandler);
 gamePanel.addEventListener("click", gameBtnHandler);
 endPanel.addEventListener("click", endBtnHandler);
 
+//function for handeling main menue button events
 function mainBtnHandler(event) {
   let text = event.target.innerText;
 
@@ -27,6 +28,7 @@ function mainBtnHandler(event) {
   }
 }
 
+//function for handeling mode selection menue button events
 function modeBtnHandler(event) {
   let text = event.target.innerText.toLowerCase();
 
@@ -34,6 +36,7 @@ function modeBtnHandler(event) {
   newGame(text);
 }
 
+//function for handeling game over menue button events
 function endBtnHandler(event) {
   let text = event.target.innerText.toLowerCase();
 
@@ -48,6 +51,7 @@ function endBtnHandler(event) {
   }
 }
 
+//Sends a new request to the API for a new word
 function newGame(Category) {
   let elements = document.querySelectorAll(".disabled");
 
@@ -73,6 +77,7 @@ function newGame(Category) {
   }
 }
 
+//Updates the game page UI with the new word
 function updateGameUI(word) {
   localStorage.setItem("currentWord", word.word);
   gamePanel.querySelector("h2").innerText = word.category;
@@ -89,6 +94,7 @@ function updateGameUI(word) {
   gamePanel.style.display = "grid";
 }
 
+//function for handeling game page button events
 function gameBtnHandler(event) {
   if (event.target.classList.contains("disabled")) return;
 
@@ -119,6 +125,7 @@ function gameBtnHandler(event) {
   }
 }
 
+//updates the hangman image and saves number of mistakes
 function onWrongAnswer(answer) {
   wrongSFX.play();
   let currentWrong = JSON.parse(localStorage.getItem("wrongAnswer")) + 1;
@@ -139,6 +146,7 @@ function onWrongAnswer(answer) {
   }
 }
 
+//handles game over state for both loose and win
 function endGame(state) {
   gamePanel.style.display = "none";
   endPanel.style.display = "grid";
@@ -155,6 +163,7 @@ function endGame(state) {
   }
 }
 
+//a string function to replace a char in a specific index
 String.prototype.replaceAt = function (index, replacement) {
   return (
     this.substring(0, index) +
