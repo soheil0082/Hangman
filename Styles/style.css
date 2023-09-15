@@ -81,6 +81,23 @@ body {
   padding: 8px 14px;
 }
 
+.false {
+  color: #bb2525;
+  animation: shake 0.13s 3;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
 p {
   padding: 20px;
   color: #a8df8e;

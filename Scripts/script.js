@@ -27,6 +27,8 @@ function modeBtnHandler(event) {
 }
 
 function newGame(Category) {
+  localStorage.setItem("wrongAnswer", 0);
+
   if (Category != "all" && Category != null) {
     fetch(apiLink + "?category=" + Category)
       .then((Response) => Response.text())
@@ -63,18 +65,38 @@ function gameBtnHandler(event) {
   let character = event.target.innerText.toLowerCase();
   let word = localStorage.getItem("currentWord");
   let guess = localStorage.getItem("currentGuess");
+  let answer = gamePanel.querySelector("h3");
 
-  gamePanel.querySelector("h3").innerText = "";
-  for (let i = 0; i < word.length; i++) {
-    if (word.charAt(i) == character) {
-      guess = guess.replaceAt(i, character);
+  answer.innerText = "";
+  if (word.includes(character)) {
+    for (let i = 0; i < word.length; i++) {
+      if (word.charAt(i) == character) {
+        guess = guess.replaceAt(i, character);
+      }
     }
+  } else if (character.length == 1) {
+    onWrongAnswer(answer);
   }
-  gamePanel.querySelector("h3").innerText = guess;
+  answer.innerText = guess;
   localStorage.setItem("currentGuess", guess);
 
   if (localStorage.getItem("currentWord") == guess) {
     console.log("You Won");
+  }
+}
+
+function onWrongAnswer(answer) {
+  let currentWrong = JSON.parse(localStorage.getItem("wrongAnswer")) + 1;
+  localStorage.setItem("wrongAnswer", currentWrong);
+  let image = gamePanel.querySelector("img");
+
+  answer.classList.add("false");
+  answer.addEventListener("animationend", (e) => {
+    answer.classList.remove("false");
+  });
+  image.src = `Img/${currentWrong}.png`;
+  if (currentWrong >= 5) {
+    console.log("loose");
   }
 }
 
