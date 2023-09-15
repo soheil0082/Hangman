@@ -86,6 +86,20 @@ body {
   animation: shake 0.13s 3;
 }
 
+.disabled {
+  color: #d8d9da;
+  box-shadow: 2px 2px 0 0 white, 4px 4px 0 0 #d8d9da;
+  border: 2px solid #d8d9da;
+}
+
+.disabled:hover {
+  cursor: default;
+  color: #d8d9da;
+  box-shadow: 2px 2px 0 0 white, 4px 4px 0 0 #d8d9da;
+  border: 2px solid #d8d9da;
+  transform: unset;
+}
+
 @keyframes shake {
   0% {
     transform: translateX(0);

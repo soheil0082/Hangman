@@ -62,6 +62,8 @@ function updateGameUI(word) {
 }
 
 function gameBtnHandler(event) {
+  if (event.target.classList.contains("disabled")) return;
+
   let character = event.target.innerText.toLowerCase();
   let word = localStorage.getItem("currentWord");
   let guess = localStorage.getItem("currentGuess");
@@ -69,12 +71,14 @@ function gameBtnHandler(event) {
 
   answer.innerText = "";
   if (word.includes(character)) {
+    event.target.classList.add("disabled");
     for (let i = 0; i < word.length; i++) {
       if (word.charAt(i) == character) {
         guess = guess.replaceAt(i, character);
       }
     }
   } else if (character.length == 1) {
+    event.target.classList.add("disabled");
     onWrongAnswer(answer);
   }
   answer.innerText = guess;
