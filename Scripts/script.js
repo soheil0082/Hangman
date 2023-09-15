@@ -32,8 +32,10 @@ function mainBtnHandler(event) {
 function modeBtnHandler(event) {
   let text = event.target.innerText.toLowerCase();
 
-  modePanel.style.display = "none";
-  newGame(text);
+  if (text != null && text.length < 8) {
+    modePanel.style.display = "none";
+    newGame(text);
+  }
 }
 
 //function for handeling game over menue button events
